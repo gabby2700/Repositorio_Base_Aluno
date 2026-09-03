@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar jogo</title>
+</head>
+<body>
+
+    <h1>✏️ Editar jogo</h1>
+
+    <form action="/atualizar/{{ jogo['id'] }}" method="POST">
+
+        <label>Nome:</label>
+        <input
+            type="text"
+            name="nome"
+            value="{{ jogo['nome'] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Gênero:</label>
+        <input
+            type="text"
+            name="genero"
+            value="{{ jogo['genero'] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Nota:</label>
+        <input
+            type="number"
+            name="nota"
+            min="0"
+            max="10"
+            step="0.1"
+            value="{{ jogo['nota'] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>URL da imagem:</label>
+        <input
+            type="url"
+            name="imagem_url"
+            value="{{ jogo['imagem_url'] or '' }}"
+        >
+
+        <br><br>
+
+        <button type="submit">Salvar alterações</button>
+    </form>
+
+    <br>
+
+    <a href="/">Voltar</a>
+
+</body>
+</html>

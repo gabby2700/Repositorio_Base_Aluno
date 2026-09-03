@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca de Jogos</title>
+</head>
+<body>
+
+    <h1>🎮 Biblioteca de Jogos</h1>
+
+    <h2>Cadastrar jogo</h2>
+
+    <form action="/cadastrar" method="POST">
+        <label>Nome:</label>
+        <input type="text" name="nome" required>
+
+        <br><br>
+
+        <label>Gênero:</label>
+        <input type="text" name="genero" required>
+
+        <br><br>
+
+        <label>Nota:</label>
+        <input type="number" name="nota" min="0" max="10" step="0.1" required>
+
+        <br><br>
+
+        <label>URL da imagem:</label>
+        <input type="url" name="imagem_url">
+
+        <br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <hr>
+
+    <h2>Jogos cadastrados</h2>
+
+    {% if jogos %}
+
+        {% for jogo in jogos %}
+
+            <div>
+                {% if jogo["imagem_url"] %}
+                    <img
+                        src="{{ jogo['imagem_url'] }}"
+                        alt="Capa de {{ jogo['nome'] }}"
+                        width="120"
+                    >
+                {% else %}
+                    <p>🎮 Sem imagem</p>
+                {% endif %}
+
+                <h3>{{ jogo["nome"] }}</h3>
+
+                <p>Gênero: {{ jogo["genero"] }}</p>
+                <p>Nota: {{ jogo["nota"] }}/10</p>
+
+                <a href="/editar/{{ jogo['id'] }}">Editar</a>
+
+                <form
+                    action="/excluir/{{ jogo['id'] }}"
+                    method="POST"
+                    style="display:inline"
+                >
+                    <button type="submit">Excluir</button>
+                </form>
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Nenhum jogo cadastrado ainda.</p>
+
+    {% endif %}
+
+</body>
+</html>
